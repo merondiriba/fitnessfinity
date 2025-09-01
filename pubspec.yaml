@@ -1,0 +1,53 @@
+name: fitnessfinity
+description: A scalable fitness app skeleton with feature-first architecture (Riverpod + GoRouter + Dio)
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  # State management
+  flutter_riverpod: ^2.5.1
+  # Routing
+  go_router: ^14.2.0
+  # Networking
+  dio: ^5.5.0+1
+  # Codecs
+  intl: ^0.20.2
+  # Models (annotations)
+  freezed_annotation: ^2.4.4
+  json_annotation: ^4.9.0
+  shared_preferences: ^2.3.2   # (use the latest version)
+  path_provider: ^2.1.5
+  video_player: ^2.9.1
+  isar: ^3.1.0
+  isar_flutter_libs: ^3.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  #json_serializable: ^6.9.0
+  very_good_analysis: ^6.0.0
+  freezed: 2.4.7
+  json_serializable: ^6.7.1
+  isar_generator: ^3.1.0
+  build_runner: ^2.4.9
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/lottie/
+    - assets/exercises/
+  fonts:
+    - family: Inter
+      fonts:
+        #- asset: assets/fonts/Inter-Regular.ttf
+        #- asset: assets/fonts/Inter-Bold.ttf
+        #  weight: 700

@@ -1,0 +1,1 @@
+class StretchingEntity { const StretchingEntity(); }

@@ -1,0 +1,1 @@
+class SubscriptionsEntity { const SubscriptionsEntity(); }

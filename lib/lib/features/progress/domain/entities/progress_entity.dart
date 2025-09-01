@@ -1,0 +1,1 @@
+class ProgressEntity { const ProgressEntity(); }

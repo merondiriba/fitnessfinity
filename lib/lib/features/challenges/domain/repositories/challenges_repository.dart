@@ -1,0 +1,1 @@
+abstract interface class ChallengesRepository { Future<List<String>> list(); }

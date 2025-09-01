@@ -1,0 +1,1 @@
+class CommunityEntity { const CommunityEntity(); }

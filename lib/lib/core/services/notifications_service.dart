@@ -1,0 +1,1 @@
+class NotificationsService { Future<void> requestPermissions() async {} }

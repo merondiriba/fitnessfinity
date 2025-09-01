@@ -1,0 +1,1 @@
+class ChallengesEntity { const ChallengesEntity(); }

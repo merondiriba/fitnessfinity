@@ -1,0 +1,1 @@
+class HealthConnectService { Future<bool> isAvailable() async => false; }

@@ -1,0 +1,1 @@
+class ActivityEntity { const ActivityEntity(); }

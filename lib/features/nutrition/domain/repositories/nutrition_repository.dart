@@ -1,0 +1,1 @@
+abstract interface class NutritionRepository { Future<List<String>> list(); }

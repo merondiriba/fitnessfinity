@@ -1,0 +1,1 @@
+class HomeEntity { const HomeEntity(); }

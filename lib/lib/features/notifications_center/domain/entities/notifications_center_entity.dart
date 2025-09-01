@@ -1,0 +1,1 @@
+class Notifications_centerEntity { const Notifications_centerEntity(); }

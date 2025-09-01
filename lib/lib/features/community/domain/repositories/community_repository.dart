@@ -1,0 +1,1 @@
+abstract interface class CommunityRepository { Future<List<String>> list(); }
