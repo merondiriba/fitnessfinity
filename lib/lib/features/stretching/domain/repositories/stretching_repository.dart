@@ -1,1 +1,0 @@
-abstract interface class StretchingRepository { Future<List<String>> list(); }

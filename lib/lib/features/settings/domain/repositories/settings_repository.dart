@@ -1,1 +1,0 @@
-abstract interface class SettingsRepository { Future<List<String>> list(); }

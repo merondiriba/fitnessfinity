@@ -1,1 +1,0 @@
-class AuthService { Future<bool> isLoggedIn() async => true; }

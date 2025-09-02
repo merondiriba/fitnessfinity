@@ -1,1 +1,0 @@
-class NutritionEntity { const NutritionEntity(); }

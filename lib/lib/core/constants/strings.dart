@@ -1,1 +1,0 @@
-class Strings { static const appName = 'fitnessfinity Fitness'; }

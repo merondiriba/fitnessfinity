@@ -1,1 +1,0 @@
-abstract interface class Notifications_centerRepository { Future<List<String>> list(); }

@@ -1,1 +1,0 @@
-abstract interface class AuthRepository { Future<List<String>> list(); }

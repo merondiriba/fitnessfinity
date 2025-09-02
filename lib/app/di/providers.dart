@@ -65,7 +65,7 @@ import '../../features/onboarding/data/sources/impl/onboarding_local_isar.dart';
 
 
 final isarProvider = FutureProvider<Isar>((ref) async {
-  final db = await IsarService.open();
+  final db = await IsarService.openIsarDev();
 
   // Optionally: dispose logic when ProviderScope is destroyed.
   ref.onDispose(() {

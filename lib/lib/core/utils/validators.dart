@@ -1,1 +1,0 @@
-class Validators { static bool email(String v)=> v.contains('@'); }

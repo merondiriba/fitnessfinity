@@ -1,1 +1,0 @@
-class Routine_builderEntity { const Routine_builderEntity(); }

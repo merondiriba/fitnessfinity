@@ -1,1 +1,0 @@
-abstract interface class ProgressRepository { Future<List<String>> list(); }

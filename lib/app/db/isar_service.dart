@@ -18,7 +18,7 @@ class IsarService {
   static Isar? _isar;
 
 
-  Future<Isar> openIsarDev() async {
+  static Future<Isar> openIsarDev() async {
     final dir = await getApplicationDocumentsDirectory();
 
     // 👇 Wipe the database before opening (DEV ONLY!)

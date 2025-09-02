@@ -1,1 +1,0 @@
-class Urls { static const privacy = 'https://example.com/privacy'; }

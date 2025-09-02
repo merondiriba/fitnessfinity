@@ -1,1 +1,0 @@
-abstract interface class ActivityRepository { Future<List<String>> list(); }

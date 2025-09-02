@@ -1,1 +1,0 @@
-extension DT on DateTime { String ymd() => toIso8601String().split('T').first; }

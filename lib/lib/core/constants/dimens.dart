@@ -1,1 +1,0 @@
-class Dimens { static const padding = 16.0; }

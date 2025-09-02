@@ -1,1 +1,0 @@
-class ChallengesEntity { const ChallengesEntity(); }
