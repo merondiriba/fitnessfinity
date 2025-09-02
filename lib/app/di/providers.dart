@@ -1,5 +1,6 @@
 // lib/app/di/providers.dart
-import 'package:fitnessfinity/app/db/isar_service.dart';
+import 'package:fitnessfinity/core/domain/user_profile_entity.dart';
+import 'package:fitnessfinity/core/storage/isar_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dio/dio.dart';
 import 'package:isar/isar.dart';
@@ -32,14 +33,14 @@ import '../../features/stretching/domain/usecases/get_stretching_items.dart';
 
 // lib/app/di/providers.dart (append these onboarding bindings)
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../features/onboarding/data/sources/onboarding_local_source.dart';
-import '../../features/onboarding/data/repositories/onboarding_repository_impl.dart';
-import '../../features/onboarding/domain/repositories/onboarding_repository.dart';
-import '../../features/onboarding/domain/usecases/load_onboarding.dart';
-import '../../features/onboarding/domain/usecases/save_onboarding.dart';
-import '../../features/onboarding/domain/usecases/complete_onboarding.dart';
-import '../../features/onboarding/domain/usecases/is_onboarding_completed.dart';
-import 'package:fitnessfinity/features/onboarding/data/sources/impl/onboarding_local_prefs.dart';
+// import '../../features/onboarding/data/sources/onboarding_local_source.dart';
+// import '../../features/onboarding/data/repositories/onboarding_repository_impl.dart';
+// import '../../features/onboarding/domain/repositories/onboarding_repository.dart';
+// import '../../features/onboarding/domain/usecases/load_onboarding.dart';
+// import '../../features/onboarding/domain/usecases/save_onboarding.dart';
+// import '../../features/onboarding/domain/usecases/complete_onboarding.dart';
+// import '../../features/onboarding/domain/usecases/is_onboarding_completed.dart';
+// import 'package:fitnessfinity/features/onboarding/data/sources/impl/onboarding_local_prefs.dart';
 
 
 
@@ -48,20 +49,45 @@ import 'package:fitnessfinity/features/onboarding/data/sources/impl/onboarding_l
 
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+//
+// // Onboarding layers
+// import '../../features/onboarding/data/sources/onboarding_local_source.dart';
+// import '../../features/onboarding/data/repositories/onboarding_repository_impl.dart';
+// import '../../features/onboarding/domain/repositories/onboarding_repository.dart';
+// import '../../features/onboarding/domain/usecases/load_onboarding.dart';
+// import '../../features/onboarding/domain/usecases/save_onboarding.dart';
+// import '../../features/onboarding/domain/usecases/complete_onboarding.dart';
+// import '../../features/onboarding/domain/usecases/is_onboarding_completed.dart';
+//
+// // Backends
+// import '../../core/storage/preferences_storage.dart';
+// // import '../../features/onboarding/data/sources/impl/onboarding_local_prefs.dart';
+// import '../../features/onboarding/data/sources/impl/onboarding_local_isar.dart';
 
-// Onboarding layers
-import '../../features/onboarding/data/sources/onboarding_local_source.dart';
-import '../../features/onboarding/data/repositories/onboarding_repository_impl.dart';
-import '../../features/onboarding/domain/repositories/onboarding_repository.dart';
-import '../../features/onboarding/domain/usecases/load_onboarding.dart';
-import '../../features/onboarding/domain/usecases/save_onboarding.dart';
-import '../../features/onboarding/domain/usecases/complete_onboarding.dart';
-import '../../features/onboarding/domain/usecases/is_onboarding_completed.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:isar/isar.dart';
 
-// Backends
-import '../../core/storage/preferences_storage.dart';
-// import '../../features/onboarding/data/sources/impl/onboarding_local_prefs.dart';
-import '../../features/onboarding/data/sources/impl/onboarding_local_isar.dart';
+// adjust to your path:
+import '../../data/isar/user_profile_model.dart';
+import '../../features/profile/data/user_profile_repository_isar.dart';
+
+// Opens a single Isar instance.
+// If you don't have an IsarService, inline open() here.
+// final isarProvider = FutureProvider<Isar>((ref) async {
+//   return IsarService.open();
+// });
+
+// Repo
+final userProfileRepositoryProvider = Provider<UserProfileRepository>((ref) {
+  final isar = ref.watch(isarProvider).requireValue;
+  return UserProfileRepositoryIsar(isar);
+});
+
+// Live profile stream for the whole app
+final userProfileStreamProvider = StreamProvider<UserProfileEntity?>((ref) {
+  final repo = ref.watch(userProfileRepositoryProvider);
+  return repo.watchLatest();
+});
 
 
 final isarProvider = FutureProvider<Isar>((ref) async {
@@ -85,37 +111,37 @@ final selectedBackendProvider = Provider<OnboardingBackend>((ref) {
 });
 
 // Shared prefs storage (only needed if using prefs backend)
-final preferencesStorageProvider = Provider<PreferencesStorage>((ref) => PreferencesStorage());
+// final preferencesStorageProvider = Provider<PreferencesStorage>((ref) => PreferencesStorage());
 
 // Local source (factory)
-final onboardingLocalSourceProvider = Provider<OnboardingLocalSource>((ref) {
-  final backend = ref.watch(selectedBackendProvider);
-  switch (backend) {
-    case OnboardingBackend.prefs:
-      return OnboardingLocalPrefs(ref.watch(preferencesStorageProvider));
-    case OnboardingBackend.isar:
-      return OnboardingLocalIsar();
-  }
-});
-
-// Repository
-final onboardingRepositoryProvider = Provider<OnboardingRepository>(
-      (ref) => OnboardingRepositoryImpl(ref.watch(onboardingLocalSourceProvider)),
-);
-
-// Use cases
-final loadOnboardingProvider = Provider<LoadOnboarding>(
-      (ref) => LoadOnboarding(ref.watch(onboardingRepositoryProvider)),
-);
-final saveOnboardingProvider = Provider<SaveOnboarding>(
-      (ref) => SaveOnboarding(ref.watch(onboardingRepositoryProvider)),
-);
-final completeOnboardingProvider = Provider<CompleteOnboarding>(
-      (ref) => CompleteOnboarding(ref.watch(onboardingRepositoryProvider)),
-);
-final isOnboardingCompletedProvider = Provider<IsOnboardingCompleted>(
-      (ref) => IsOnboardingCompleted(ref.watch(onboardingRepositoryProvider)),
-);
+// final onboardingLocalSourceProvider = Provider<OnboardingLocalSource>((ref) {
+//   final backend = ref.watch(selectedBackendProvider);
+//   switch (backend) {
+//     case OnboardingBackend.prefs:
+//       return OnboardingLocalPrefs(ref.watch(preferencesStorageProvider));
+//     case OnboardingBackend.isar:
+//       return OnboardingLocalIsar();
+//   }
+// });
+//
+// // Repository
+// final onboardingRepositoryProvider = Provider<OnboardingRepository>(
+//       (ref) => OnboardingRepositoryImpl(ref.watch(onboardingLocalSourceProvider)),
+// );
+//
+// // Use cases
+// final loadOnboardingProvider = Provider<LoadOnboarding>(
+//       (ref) => LoadOnboarding(ref.watch(onboardingRepositoryProvider)),
+// );
+// final saveOnboardingProvider = Provider<SaveOnboarding>(
+//       (ref) => SaveOnboarding(ref.watch(onboardingRepositoryProvider)),
+// );
+// final completeOnboardingProvider = Provider<CompleteOnboarding>(
+//       (ref) => CompleteOnboarding(ref.watch(onboardingRepositoryProvider)),
+// );
+// final isOnboardingCompletedProvider = Provider<IsOnboardingCompleted>(
+//       (ref) => IsOnboardingCompleted(ref.watch(onboardingRepositoryProvider)),
+// );
 
 
 

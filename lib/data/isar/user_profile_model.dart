@@ -102,6 +102,42 @@ class UserProfileModel {
 
   @Index(type: IndexType.value)
   DateTime updatedAt = DateTime.now();
+
+  //////
+
+  List<String> goals = [];
+
+  /// "male","female","other"
+  String? gender;
+
+  /// Age in years
+  int? age;
+
+  /// "beginner","intermediate","advanced"
+  String fitnessLevel = 'beginner';
+
+  /// Default session/workout duration preference (minutes)
+  int preferredDurationMin = 20;
+
+  /// Content preferences
+  bool prefersStretchFocus = true;
+  bool prefersWorkoutFocus = true;
+
+  /// Reminder settings
+  bool remindersEnabled = false;
+
+  /// "HH:mm" 24h string, e.g. "07:30"
+  String? reminderTime24h;
+
+  /// Always update when saving
+  @Index()
+  DateTime onboardingUpdatedAt = DateTime.now();
+
+  // Optional: version you can bump when you change semantics
+  int schemaVersion = 1;
+
+
+
 }
 
 @embedded

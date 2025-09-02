@@ -24,7 +24,7 @@ import '../../features/settings/presentation/pages/settings_page.dart';
 import '../../features/subscriptions/presentation/pages/subscriptions_page.dart';
 
 // ===== Auth/Onboarding (no footer) =====
-import '../../features/onboarding/presentation/pages/welcome_page.dart';
+// import '../../features/onboarding/presentation/pages/welcome_page.dart';
 // import '../../features/auth/presentation/pages/login_page.dart'; // if needed
 
 import 'routes.dart';
@@ -38,10 +38,6 @@ class AppRouter {
     initialLocation: AppRoutes.home, // go straight to Home; change if you need a splash
     routes: [
       // ---------- Outside the shell (no footer) ----------
-      GoRoute(
-        path: AppRoutes.onboarding,
-        builder: (context, state) => const WelcomePage(),
-      ),
       // GoRoute(path: '/login', builder: (context, state) => const LoginPage()),
 
       // ---------- App shell (footer is here) ----------

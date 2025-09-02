@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:fitnessfinity/data/isar/exercise_model.dart';
 import 'package:fitnessfinity/data/isar/user_profile_model.dart';
-import 'package:fitnessfinity/features/onboarding/domain/entities/onboarding_profile_isar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
@@ -16,6 +15,23 @@ import 'package:path_provider/path_provider.dart';
 class IsarService {
   IsarService._();
   static Isar? _isar;
+  static var schemaList = [
+  UserProfileModelSchema,
+  ExerciseModelSchema,
+  ExerciseEnergySchema,
+  SavedRoutineSchema,
+  QuickStartGroupSchema,
+  FavoriteExerciseSchema,
+  MeasurementEntrySchema,
+  GoalSchema,
+  WorkoutSessionSchema,
+  WorkoutExerciseSchema,
+  WorkoutSetSchema,
+  SessionMetricSampleSchema,
+  PersonalRecordSchema,
+  ExerciseEnergySchema
+  // add more schemas here as you create them
+  ];
 
 
   static Future<Isar> openIsarDev() async {
@@ -29,23 +45,7 @@ class IsarService {
     const dbName = 'fitnessfinity';
 
     _isar = await Isar.open(
-      [
-        UserProfileModelSchema,
-        ExerciseModelSchema,
-        ExerciseEnergySchema,
-        SavedRoutineSchema,
-        QuickStartGroupSchema,
-        FavoriteExerciseSchema,
-        MeasurementEntrySchema,
-        GoalSchema,
-        WorkoutSessionSchema,
-        WorkoutExerciseSchema,
-        WorkoutSetSchema,
-        SessionMetricSampleSchema,
-        PersonalRecordSchema,
-        ExerciseEnergySchema
-        // add more schemas here as you create them
-      ],
+      schemaList,
       directory: dir.path,
       name: dbName,
       inspector: true, // enables Isar Inspector only in debug
@@ -65,23 +65,7 @@ class IsarService {
     const dbName = 'fitnessfinity';
 
     _isar = await Isar.open(
-      [
-        UserProfileModelSchema,
-        ExerciseModelSchema,
-        ExerciseEnergySchema,
-        SavedRoutineSchema,
-        QuickStartGroupSchema,
-        FavoriteExerciseSchema,
-        MeasurementEntrySchema,
-        GoalSchema,
-        WorkoutSessionSchema,
-        WorkoutExerciseSchema,
-        WorkoutSetSchema,
-        SessionMetricSampleSchema,
-        PersonalRecordSchema,
-        ExerciseEnergySchema
-        // add more schemas here as you create them
-      ],
+      schemaList,
       directory: dir.path,
       name: dbName,
       inspector: kDebugMode, // enables Isar Inspector only in debug
