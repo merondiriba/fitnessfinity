@@ -44,7 +44,7 @@ part 'user_profile_model.g.dart';
 @collection
 class UserProfileModel {
   /// Single-user device: keep exactly one row (id=1).
-  Id id = 1;
+  Id id = Isar.autoIncrement;
 
   /// Display name. Example: "Yalem"
   String displayName = 'Athlete';
@@ -183,7 +183,7 @@ class ContentPref {
 
 @collection
 class SavedRoutine {
-  Id id = Isar.autoIncrement;
+  Id? id;
 
   @Index(caseSensitive: false)
   late String name;
@@ -248,7 +248,7 @@ class RoutineExerciseItem {
 
 @collection
 class QuickStartGroup {
-  Id id = Isar.autoIncrement;
+  Id? id;
 
   @Index(caseSensitive: false)
   late String title;
@@ -275,7 +275,7 @@ class QuickStartItem {
 
 @collection
 class FavoriteExercise {
-  Id id = Isar.autoIncrement;
+  Id? id;
 
   @Index(caseSensitive: false)
   late String exerciseId;
@@ -287,7 +287,7 @@ class FavoriteExercise {
 
 @collection
 class MeasurementEntry {
-  Id id = Isar.autoIncrement;
+  Id? id;
 
   @Enumerated(EnumType.name)
   @Index(caseSensitive: false)
@@ -304,7 +304,7 @@ class MeasurementEntry {
 
 @collection
 class Goal {
-  Id id = Isar.autoIncrement;
+  Id? id;
 
   @Index(caseSensitive: false)
   late String title;
@@ -331,7 +331,7 @@ class Goal {
 
 @collection
 class WorkoutSession {
-  Id id = Isar.autoIncrement;
+  Id? id;
 
   String? savedRoutineId;
   String? quickStartGroupId;
@@ -364,7 +364,7 @@ class WorkoutSession {
 
 @collection
 class WorkoutExercise {
-  Id id = Isar.autoIncrement;
+  Id? id;
 
   final session = IsarLink<WorkoutSession>();
 
@@ -399,7 +399,7 @@ class WorkoutExercise {
 
 @collection
 class WorkoutSet {
-  Id id = Isar.autoIncrement;
+  Id? id;
 
   final workoutExercise = IsarLink<WorkoutExercise>();
 
@@ -423,7 +423,7 @@ class WorkoutSet {
 
 @collection
 class SessionMetricSample {
-  Id id = Isar.autoIncrement;
+  Id? id;
 
   final session = IsarLink<WorkoutSession>();
 
@@ -444,7 +444,7 @@ class SessionMetricSample {
 
 @collection
 class PersonalRecord {
-  Id id = Isar.autoIncrement;
+  Id? id;
 
   @Index(caseSensitive: false)
   late String exerciseId;
@@ -478,7 +478,7 @@ class PRMetric {
 
 @collection
 class ExerciseEnergy {
-  Id id = Isar.autoIncrement;
+  Id? id;
 
   @Index(caseSensitive: false, unique: true, replace: true)
   late String exerciseId;

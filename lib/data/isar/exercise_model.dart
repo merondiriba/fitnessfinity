@@ -144,7 +144,7 @@ part 'exercise_model.g.dart';
 @collection
 class ExerciseModel {
   /// Isar primary key (auto).
-  Id isarId = Isar.autoIncrement;
+  Id? id;
 
   /// Stable string id for this exercise (unique in your catalog).
   /// Example: "bench_barbell_flat"
